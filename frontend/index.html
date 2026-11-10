@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ErrorTrack | Gestão de estudos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <a class="brand" href="#" data-screen="inicio"><span class="brand-mark">E</span><span>ErrorTrack</span></a>
+        <nav class="navigation">
+            <button class="nav-item active" data-screen="inicio"><span>⌂</span>Visão geral</button>
+            <button class="nav-item" data-screen="alunos"><span>♙</span>Alunos</button>
+            <button class="nav-item" data-screen="questoes"><span>▤</span>Questões</button>
+            <button class="nav-item" data-screen="respostas"><span>✓</span>Registrar resposta</button>
+            <button class="nav-item" data-screen="relatorios"><span>▥</span>Relatórios</button>
+        </nav>
+        <div class="sidebar-footer"><span class="status-dot"></span> Sistema de estudos</div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <div><p class="eyebrow">PAINEL DE APRENDIZAGEM</p><h1 id="pageTitle">Visão geral</h1></div>
+            <div class="topbar-tag">ErrorTrack <span>●</span></div>
+        </header>
+
+        <div id="message" class="message" role="status" aria-live="polite"></div>
+
+        <section class="screen active" id="screen-inicio">
+            <div class="welcome panel">
+                <div><p class="eyebrow">SEU PROGRESSO, EM UM SÓ LUGAR</p><h2>Aprenda com cada erro.</h2><p>Organize questões, acompanhe respostas e descubra onde concentrar sua revisão.</p><button class="primary" data-screen="respostas">Registrar resposta <span>→</span></button></div>
+                <div class="welcome-art" aria-hidden="true"><div class="art-ring ring-one"></div><div class="art-ring ring-two"></div><div class="art-card"><span>ACERTOS</span><strong id="heroAccuracy">0%</strong><small>do total respondido</small></div><div class="art-check">✓</div></div>
+            </div>
+            <div class="stats-grid">
+                <article class="stat-card"><span class="stat-icon purple">♙</span><p>Alunos cadastrados</p><strong id="totalAlunos">0</strong><small>Registros no sistema</small></article>
+                <article class="stat-card"><span class="stat-icon blue">▤</span><p>Questões cadastradas</p><strong id="totalQuestoes">0</strong><small>Para praticar e revisar</small></article>
+                <article class="stat-card"><span class="stat-icon green">✓</span><p>Respostas registradas</p><strong id="totalRespostas">0</strong><small>Práticas realizadas</small></article>
+                <article class="stat-card"><span class="stat-icon orange">↗</span><p>Erros identificados</p><strong id="totalErros">0</strong><small>Oportunidades de revisão</small></article>
+            </div>
+            <div class="panel section-panel"><div class="section-heading"><div><p class="eyebrow">ACOMPANHAMENTO</p><h2>Últimos erros registrados</h2></div><button class="text-button" data-screen="relatorios">Ver relatório →</button></div><div id="recentErrors" class="data-list empty-state">Nenhum erro registrado ainda.</div></div>
+        </section>
+
+        <section class="screen" id="screen-alunos">
+            <div class="screen-intro"><div><p class="eyebrow">CADASTRO E ORGANIZAÇÃO</p><h2>Gestão de alunos</h2><p>Cadastre, consulte, edite ou remova os alunos do sistema.</p></div><span class="section-number">01 / CADASTROS</span></div>
+            <div class="two-column">
+                <div class="panel form-panel"><div class="section-heading"><div><h3 id="alunoFormTitle">Cadastrar aluno</h3><p>Preencha os dados abaixo.</p></div><span class="mini-icon">＋</span></div>
+                    <form id="alunoForm">
+                        <input type="hidden" id="alunoId">
+                        <label for="alunoNome">Nome completo</label><input id="alunoNome" type="text" placeholder="Ex.: Ana Silva" required maxlength="255">
+                        <label for="alunoMateria">Matéria principal</label><input id="alunoMateria" type="text" placeholder="Ex.: Matemática" required maxlength="255">
+                        <div class="form-actions"><button class="primary" id="alunoSubmit" type="submit">Cadastrar aluno</button><button class="secondary hidden" id="cancelAluno" type="button">Cancelar</button></div>
+                    </form>
+                </div>
+                <div class="panel list-panel"><div class="section-heading"><div><h3>Alunos cadastrados</h3><p id="alunoCount">0 registros</p></div></div>
+                    <form class="search-row" id="alunoSearchForm"><input id="alunoSearch" type="search" placeholder="Buscar pelo nome"><input id="alunoSearchId" type="number" min="1" placeholder="ID"><button class="secondary" type="submit">Buscar</button><button class="icon-button" id="clearAlunoSearch" type="button" aria-label="Limpar busca">×</button></form>
+                    <div id="alunoList" class="data-list empty-state">Carregando alunos...</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="screen" id="screen-questoes">
+            <div class="screen-intro"><div><p class="eyebrow">BANCO DE EXERCÍCIOS</p><h2>Gestão de questões</h2><p>Monte seu banco de questões e mantenha as alternativas corretas registradas.</p></div><span class="section-number">02 / CONTEÚDO</span></div>
+            <div class="two-column">
+                <div class="panel form-panel"><div class="section-heading"><div><h3 id="questaoFormTitle">Cadastrar questão</h3><p>Adicione um exercício ao banco.</p></div><span class="mini-icon">＋</span></div>
+                    <form id="questaoForm">
+                        <input type="hidden" id="questaoId">
+                        <label for="questaoEnunciado">Enunciado</label><textarea id="questaoEnunciado" rows="4" placeholder="Digite o enunciado da questão" required></textarea>
+                        <label for="questaoMateria">Matéria</label><input id="questaoMateria" type="text" placeholder="Ex.: Biologia" required maxlength="255">
+                        <label for="questaoAlternativa">Alternativa correta</label><input id="questaoAlternativa" type="text" placeholder="Ex.: A" required maxlength="255">
+                        <label for="questaoExplicacao">Explicação (opcional)</label><textarea id="questaoExplicacao" rows="3" placeholder="Explique por que essa é a resposta correta"></textarea>
+                        <div class="form-actions"><button class="primary" id="questaoSubmit" type="submit">Cadastrar questão</button><button class="secondary hidden" id="cancelQuestao" type="button">Cancelar</button></div>
+                    </form>
+                </div>
+                <div class="panel list-panel"><div class="section-heading"><div><h3>Banco de questões</h3><p id="questaoCount">0 registros</p></div></div>
+                    <form class="search-row filters" id="questaoSearchForm"><input id="questaoSearch" type="search" placeholder="Buscar enunciado"><input id="questaoSearchId" type="number" min="1" placeholder="ID"><input id="materiaSearch" type="search" placeholder="Filtrar matéria"><button class="secondary" type="submit">Filtrar</button><button class="icon-button" id="clearQuestaoSearch" type="button" aria-label="Limpar filtros">×</button></form>
+                    <div id="questaoList" class="data-list empty-state">Carregando questões...</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="screen" id="screen-respostas">
+            <div class="screen-intro"><div><p class="eyebrow">PRÁTICA E APRENDIZADO</p><h2>Registrar resposta</h2><p>Associe uma resposta a um aluno e veja automaticamente se houve acerto ou erro.</p></div><span class="section-number">03 / PRÁTICA</span></div>
+            <div class="two-column">
+                <div class="panel form-panel"><div class="section-heading"><div><h3>Nova resposta</h3><p>Selecione o aluno e o exercício.</p></div><span class="mini-icon">✓</span></div>
+                    <form id="respostaForm">
+                        <label for="respostaAluno">Aluno</label><select id="respostaAluno" required><option value="">Selecione um aluno</option></select>
+                        <label for="respostaQuestao">Questão</label><select id="respostaQuestao" required><option value="">Selecione uma questão</option></select>
+                        <label for="respostaMarcada">Resposta marcada</label><input id="respostaMarcada" type="text" placeholder="Digite a alternativa ou resposta" required maxlength="255">
+                        <button class="primary full-width" type="submit">Verificar e registrar resposta</button>
+                    </form>
+                    <div id="resultadoResposta" class="answer-result hidden"></div>
+                </div>
+                <div class="panel list-panel"><div class="section-heading"><div><h3>Histórico de respostas</h3><p>Respostas mais recentes primeiro.</p></div></div>
+                    <form class="search-row" id="respostaFilterForm"><select id="historicoAluno"><option value="">Todos os alunos</option></select><button class="secondary" type="submit">Filtrar</button></form>
+                    <div id="respostaList" class="data-list empty-state">Nenhuma resposta registrada.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="screen" id="screen-relatorios">
+            <div class="screen-intro"><div><p class="eyebrow">ANÁLISE DE DESEMPENHO</p><h2>Relatórios de erros</h2><p>Use o histórico para identificar os conteúdos que precisam de mais revisão.</p></div><span class="section-number">04 / ANÁLISES</span></div>
+            <div class="panel report-filter"><div><h3>Filtrar por aluno</h3><p>Deixe em branco para analisar todos os registros.</p></div><form id="relatorioFilterForm"><select id="relatorioAluno"><option value="">Todos os alunos</option></select><button class="primary" type="submit">Atualizar relatório</button></form></div>
+            <div class="stats-grid report-stats">
+                <article class="stat-card"><p>Total de respostas</p><strong id="reportTotal">0</strong><small>Respostas registradas</small></article>
+                <article class="stat-card"><p>Acertos</p><strong id="reportCorrect">0</strong><small>Respostas corretas</small></article>
+                <article class="stat-card"><p>Erros</p><strong id="reportErrors">0</strong><small>Respostas incorretas</small></article>
+                <article class="stat-card"><p>Taxa de acerto</p><strong id="reportAccuracy">0%</strong><small>Percentual de acertos</small></article>
+            </div>
+            <div class="panel section-panel"><div class="section-heading"><div><p class="eyebrow">PONTOS DE ATENÇÃO</p><h3>Questões respondidas incorretamente</h3></div><span class="mini-icon warning">!</span></div><div id="errorList" class="data-list empty-state">Nenhum erro registrado.</div></div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
