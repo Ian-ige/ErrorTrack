@@ -77,6 +77,22 @@ O diagrama de classes está em [`docs/diagrama_classes.md`](docs/diagrama_classe
 | GET | `/relatorios/erros` | Lista respostas incorretas; aceita `?aluno_id=...` |
 | GET | `/relatorios/desempenho` | Retorna indicadores de desempenho; aceita `?aluno_id=...` |
 
+## GitHub Pages
+
+Este repositório possui suporte e configuração completa para o **GitHub Pages**:
+
+- **Workflow automatizado**: O arquivo [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) realiza o build e publicação contínua da pasta `frontend/` para o GitHub Pages sempre que houver push na branch `main`.
+- **Compatibilidade total**:
+  - No GitHub Pages, como servidores estáticos não executam Python/Flask, o frontend conta com um **Modo Demonstração (armazenamento local via `localStorage`)**, permitindo testar e demonstrar todas as 21 funcionalidades sem erros ou dependência de servidor ativo.
+  - Se você hospedar o backend Flask (no Render, Railway, Fly.io, etc.), basta clicar no ícone ⚙ no rodapé da barra lateral da aplicação e inserir a URL da sua API para sincronização em tempo real.
+- **Redirecionamento raiz**: Um arquivo [`index.html`](index.html) raiz redireciona para a pasta do frontend caso o repositório seja configurado na opção padrão de branch do GitHub Pages.
+
+### Como ativar no GitHub:
+1. Abra o repositório no GitHub: `https://github.com/Ian-ige/ErrorTrack`
+2. Acesse **Settings** > **Pages**.
+3. Em **Build and deployment** > **Source**, selecione **GitHub Actions** (recomendado).
+4. Em instantes, o site estará no ar no endereço: `https://ian-ige.github.io/ErrorTrack/`
+
 ## Fluxo arquitetural
 
 Cada ação passa pela interface, rota da API, Controller, Service e Model ou Repository antes de acessar os dados. As consultas especializadas de busca e relatório ficam encapsuladas nos Repositories. As Controllers não executam regras de negócio nem SQL diretamente.

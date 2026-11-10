@@ -136,6 +136,24 @@ select option { background: #191c29; }
 .report-filter select { flex: 1; }
 .report-stats .stat-card { padding: 22px; }
 .hidden { display: none !important; }
+
+/* Status da API e Modal de Configuração */
+.status-info { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
+.status-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; }
+.status-dot.demo { background: #38bdf8; box-shadow: 0 0 12px #38bdf888; }
+.status-dot.offline { background: var(--red); box-shadow: 0 0 12px #ff778588; }
+.settings-btn { margin-left: auto; background: transparent; border: 0; color: var(--muted); font-size: 14px; padding: 4px 6px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; transition: .15s ease; cursor: pointer; }
+.settings-btn:hover { color: white; background: #ffffff15; }
+.modal { position: fixed; inset: 0; border: 0; padding: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px); width: 100vw; height: 100vh; display: grid; place-items: center; z-index: 999; }
+.modal:not([open]) { display: none; }
+.modal-box { width: min(480px, 92vw); background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); animation: appear .2s ease; }
+.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.modal-header h3 { margin: 0; font-size: 17px; }
+.modal-desc { color: var(--muted); font-size: 13px; line-height: 1.5; margin-top: 0; margin-bottom: 14px; }
+.status-box { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; background: var(--surface-soft); border: 1px solid var(--border); margin-bottom: 14px; font-size: 13px; }
+.modal-hint { display: block; color: var(--muted); font-size: 11px; margin-top: 6px; margin-bottom: 18px; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
+
 @media (max-width: 1180px) {
     .sidebar { width: 210px; }
     .main { margin-left: 210px; padding-right: 24px; padding-left: 24px; }

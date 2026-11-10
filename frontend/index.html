@@ -16,7 +16,13 @@
             <button class="nav-item" data-screen="respostas"><span>✓</span>Registrar resposta</button>
             <button class="nav-item" data-screen="relatorios"><span>▥</span>Relatórios</button>
         </nav>
-        <div class="sidebar-footer"><span class="status-dot"></span> Sistema de estudos</div>
+        <div class="sidebar-footer">
+            <div class="status-info">
+                <span class="status-dot" id="apiStatusDot"></span>
+                <span class="status-text" id="apiStatusText">Sistema de estudos</span>
+            </div>
+            <button class="settings-btn" id="openSettingsBtn" type="button" title="Configurar conexão da API">⚙</button>
+        </div>
     </aside>
 
     <main class="main">
@@ -110,6 +116,31 @@
             <div class="panel section-panel"><div class="section-heading"><div><p class="eyebrow">PONTOS DE ATENÇÃO</p><h3>Questões respondidas incorretamente</h3></div><span class="mini-icon warning">!</span></div><div id="errorList" class="data-list empty-state">Nenhum erro registrado.</div></div>
         </section>
     </main>
+    <dialog id="settingsModal" class="modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Conexão da API / Backend</h3>
+                <button type="button" class="icon-button" id="closeSettingsModal" aria-label="Fechar">×</button>
+            </div>
+            <form id="settingsForm">
+                <p class="modal-desc">
+                    No <strong>GitHub Pages</strong>, o frontend roda diretamente no navegador. Você pode usar o <em>Modo Demonstração</em> (armazenamento local) ou conectar a um backend Flask hospedado (Render, Railway, Fly.io ou local).
+                </p>
+                <div class="status-box">
+                    <span class="status-dot" id="modalStatusDot"></span>
+                    <span id="modalStatusLabel">Modo Demonstração (Navegador)</span>
+                </div>
+                <label for="apiUrlInput">URL da API Backend (opcional)</label>
+                <input id="apiUrlInput" type="url" placeholder="Ex.: https://seu-backend.onrender.com ou http://127.0.0.1:5000">
+                <small class="modal-hint">Deixe em branco para usar o modo de demonstração local ou a mesma origem.</small>
+                <div class="modal-actions">
+                    <button type="button" class="secondary" id="resetMockDataBtn">Resetar dados demo</button>
+                    <button type="submit" class="primary">Salvar e Conectar</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
     <script src="script.js"></script>
 </body>
 </html>
